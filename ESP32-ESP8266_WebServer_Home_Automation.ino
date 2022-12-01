@@ -1,5 +1,4 @@
-  /* Simple ESP32 Web Server  
-  *  The ESP32 Wifi is configured as Access Point.  
+  /*  The ESP32/ESP8266 Wifi is configured as Access Point.  
   *    
   */  
   //check it is ESP32 or ESP8266
@@ -9,7 +8,7 @@
  #define RELAY_1  14  
  #define RELAY_2  12
  #define RELAY_3  13
- #define RELAY_4  15  
+ #define RELAY_4  16  
 #elif defined(ESP32)
 #include <WiFi.h>
 //initialize the relays for ESP32 
@@ -133,7 +132,7 @@
   // In order for us to use the HTTP GET functionality,  
   //  the HTML hyperlinks or href is use in the buttons.   
   //  So that, when you press the buttons, it will send a request to the   
-  //  web server with the href links by which our ESP32 web server will  
+  //  web server with the href links by which our ESP32/ESP8266 web server will  
   //  be check using HTTP GET and execute the equivalent action  
     
   // Send the whole HTML  
@@ -157,10 +156,10 @@
     
   // Display buttons for Relay 2  
   client.println("<center><p>Relay 2 is " + Relay2State + "</p></center>");    
-  if (Relay3State == "off") {  
-   client.println("<center><p><a href=\"/Relay_2/on\"><button>Turn ON</button></a></p></center>");  
+  if (Relay2State == "off") {  
+   client.println("<center><p><a href=\"/RELAY_2/on\"><button>Turn ON</button></a></p></center>");  
   } else {  
-   client.println("<center><p><a href=\"/Relay_2/off\"><button>Turn OFF</button></a></p></center>");  
+   client.println("<center><p><a href=\"/RELAY_2/off\"><button>Turn OFF</button></a></p></center>");  
   }   
    
   client.print("<hr>");  
@@ -168,17 +167,17 @@
   // Display buttons for Relay 3  
   client.println("<center><p>Relay 3 is " + Relay3State + "</p></center>");    
   if (Relay3State == "off") {  
-   client.println("<center><p><a href=\"/Relay_3/on\"><button>Turn ON</button></a></p></center>");  
+   client.println("<center><p><a href=\"/RELAY_3/on\"><button>Turn ON</button></a></p></center>");  
   } else {  
-   client.println("<center><p><a href=\"/Relay_3/off\"><button>Turn OFF</button></a></p></center>");  
+   client.println("<center><p><a href=\"/RELAY_3/off\"><button>Turn OFF</button></a></p></center>");  
   }  
  client.print("<hr>"); 
    // Display buttons for Relay 4  
   client.println("<center><p>Relay 4 is " + Relay4State + "</p></center>");    
   if (Relay4State == "off") {  
-   client.println("<center><p><a href=\"/Relay_4/on\"><button>Turn ON</button></a></p></center>");  
+   client.println("<center><p><a href=\"/RELAY_4/on\"><button>Turn ON</button></a></p></center>");  
   } else {  
-   client.println("<center><p><a href=\"/Relay_4/off\"><button>Turn OFF</button></a></p></center>");  
+   client.println("<center><p><a href=\"/RELAY_4/off\"><button>Turn OFF</button></a></p></center>");  
   }  
    
   client.println("</body></html>");  
@@ -197,11 +196,11 @@
    Serial.println("Relay 1 off");  
    Relay1State = "off";  
    digitalWrite(RELAY_1, HIGH);  
-  } else if (http.indexOf("GET /Relay_2/on") >= 0) {  
+  } else if (http.indexOf("GET /RELAY_2/on") >= 0) {  
    Serial.println("Relay 2 on");  
    Relay2State = "on";  
    digitalWrite(RELAY_2, LOW);  
-  } else if (http.indexOf("GET /Relay_2/off") >= 0) {  
+  } else if (http.indexOf("GET /RELAY_2/off") >= 0) {  
    Serial.println("Relay 2 off");  
    Relay2State = "off";  
    digitalWrite(RELAY_2, HIGH);  
